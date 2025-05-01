@@ -1,0 +1,20 @@
+{
+  "buildFiles": [
+    "/home/dev/flutter/packages/flutter_tools/gradle/src/main/groovy/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/home/dev/Android/Sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/home/dev/Documentos/trabalhos/nuflix-project/nuflix_better_player/example/android/app/.cxx/Debug/272r13c6/armeabi-v7a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/home/dev/Android/Sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/home/dev/Documentos/trabalhos/nuflix-project/nuflix_better_player/example/android/app/.cxx/Debug/272r13c6/armeabi-v7a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {}
+}
