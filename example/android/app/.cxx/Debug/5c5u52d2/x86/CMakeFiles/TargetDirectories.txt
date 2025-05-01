@@ -1,0 +1,2 @@
+/home/dev/Documentos/trabalhos/nuflix-project/nuflix_better_player/example/android/app/.cxx/Debug/5c5u52d2/x86/CMakeFiles/edit_cache.dir
+/home/dev/Documentos/trabalhos/nuflix-project/nuflix_better_player/example/android/app/.cxx/Debug/5c5u52d2/x86/CMakeFiles/rebuild_cache.dir

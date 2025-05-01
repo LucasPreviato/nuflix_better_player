@@ -39,13 +39,30 @@ class WelcomePage extends StatefulWidget {
 }
 
 class _WelcomePageState extends State<WelcomePage> {
+  bool _isLoading = true;
+  String? _errorMessage;
+
   @override
   void initState() {
-    _saveAssetSubtitleToFile();
-    _saveAssetVideoToFile();
-    _saveAssetEncryptVideoToFile();
-    _saveLogoToFile();
     super.initState();
+    _initializeApp();
+  }
+
+  Future<void> _initializeApp() async {
+    try {
+      await _saveAssetSubtitleToFile();
+      await _saveAssetVideoToFile();
+      await _saveAssetEncryptVideoToFile();
+      await _saveLogoToFile();
+      setState(() {
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = "Erro ao inicializar o aplicativo: ${e.toString()}";
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -54,25 +71,38 @@ class _WelcomePageState extends State<WelcomePage> {
       appBar: AppBar(
         title: Text("Better Player Example"),
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: ListView(
-          children: [
-            const SizedBox(height: 8),
-            Image.asset(
-              "assets/logo.png",
-              height: 200,
-              width: 200,
-            ),
-            Text(
-              "Welcome to Better Player example app. Click on any element below to see example.",
-              style: TextStyle(fontSize: 16),
-            ),
-            const SizedBox(height: 8),
-            ...buildExampleElementWidgets()
-          ],
-        ),
-      ),
+      body: _isLoading
+          ? Center(child: CircularProgressIndicator())
+          : _errorMessage != null
+              ? Center(
+                  child: Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Text(
+                      _errorMessage!,
+                      textAlign: TextAlign.center,
+                      style: TextStyle(color: Colors.red),
+                    ),
+                  ),
+                )
+              : Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
+                  child: ListView(
+                    children: [
+                      const SizedBox(height: 8),
+                      Image.asset(
+                        "assets/logo.png",
+                        height: 200,
+                        width: 200,
+                      ),
+                      Text(
+                        "Welcome to Better Player example app. Click on any element below to see example.",
+                        style: TextStyle(fontSize: 16),
+                      ),
+                      const SizedBox(height: 8),
+                      ...buildExampleElementWidgets()
+                    ],
+                  ),
+                ),
     );
   }
 
